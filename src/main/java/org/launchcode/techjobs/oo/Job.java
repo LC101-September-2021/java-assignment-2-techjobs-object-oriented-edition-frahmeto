@@ -22,10 +22,10 @@ public class Job {
         nextId++;
     }
 
-    public Job(String aName, Employer aEmployer, Location aLocation, PositionType aPositionType, CoreCompetency aCoreCompetency){
+    public Job(String aName, Employer anEmployer, Location aLocation, PositionType aPositionType, CoreCompetency aCoreCompetency){
         this();
         this.name = aName;
-        this.employer = aEmployer;
+        this.employer = anEmployer;
         this.location = aLocation;
         this.positionType = aPositionType;
         this.coreCompetency = aCoreCompetency;
@@ -40,12 +40,18 @@ public class Job {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return id == job.id;
+        return id == job.id &&
+                Objects.equals(name, job.name)&&
+                Objects.equals(employer, job.employer)&&
+                Objects.equals(location, job.location)&&
+                Objects.equals(positionType, job.positionType)&&
+                Objects.equals(coreCompetency, job.coreCompetency);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, location, positionType, coreCompetency);
     }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
@@ -96,4 +102,37 @@ public class Job {
         return id;
     }
 
+//toString methods:
+    public static String toString(Job jobValues){
+
+        if (jobValues.getName() == null && jobValues.getEmployer() == null && jobValues.getLocation() == null &&
+        jobValues.getPositionType() == null && jobValues.getCoreCompetency() == null){
+            return "OOPS! This job does not seem to exist";
+
+        }
+        int jobValuesId = jobValues.getId();
+        String jobValuesName = jobValues.getName();
+        String jobValuesEmployer = jobValues.getEmployer().toString();
+        String jobValuesLocation = jobValues.getLocation().toString();
+        String jobValuesPositionType = jobValues.getPositionType().toString();
+        String jobValuesCoreCompetency = jobValues.getCoreCompetency().toString();
+        if(jobValuesName == null){
+            jobValuesName = "Data not available!";
+        }if(jobValuesEmployer == null) {
+            jobValuesEmployer = "Data not available!";
+        }if(jobValuesLocation == null) {
+            jobValuesLocation = "Data not available!";
+        }if(jobValuesPositionType == null) {
+            jobValuesPositionType = "Data not available!";
+        }if(jobValuesCoreCompetency == null) {
+            jobValuesCoreCompetency = "Data not available!";
+        }
+        return ("\n ID: " + jobValuesId + "\n Name: " + jobValuesName + "\n Employer: " + jobValuesEmployer +
+                "\n Location: " + jobValuesLocation + "\n Position Type: " + jobValuesPositionType + "\n Core Competency: " + jobValuesCoreCompetency + "\n ");
+
+    }
+
+
 }
+
+
