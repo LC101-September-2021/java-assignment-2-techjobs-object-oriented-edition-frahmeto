@@ -38,6 +38,7 @@ public abstract class JobField {
     public int hashCode(){
         return Objects.hash(getId());
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

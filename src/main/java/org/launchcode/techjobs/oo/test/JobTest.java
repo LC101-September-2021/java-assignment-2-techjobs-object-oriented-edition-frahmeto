@@ -20,7 +20,9 @@ public class JobTest {
      Job jobTest4 = new Job("Web developer", new Employer("XYZ"), new Location("Chicago"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
      Job jobTest5 = new Job("Web Developer", new Employer("XYZ"), new Location("Chicago"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
      Job jobTest6 = new Job("gigi", new Employer("ABC"), new Location(), new PositionType("Lab analyst"), new CoreCompetency());
-    //@Before
+
+
+    @Before
 
     @Test
     public void testSettingJobId(){
@@ -33,13 +35,13 @@ public class JobTest {
     }
     @Test
     public  void testJobConstructorSetsAllFields(){
-        //job3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         // Use assert statements to test that the constructor correctly assigns the class and value of each field.
+        assertTrue(jobTest3.getName() instanceof String);
         assertTrue(jobTest3.getEmployer() instanceof Employer);
         assertTrue(jobTest3.getLocation() instanceof Location);
         assertTrue(jobTest3.getPositionType() instanceof PositionType);
         assertTrue(jobTest3.getCoreCompetency() instanceof CoreCompetency);
-       // assertEquals(job3.getId(), 8);
+        //assertEquals(jobTest3.getId(), 3);
         assertEquals(jobTest3.getName(), "Product tester");
         assertEquals(jobTest3.getEmployer().getValue(), "ACME");
         assertEquals(jobTest3.getLocation().getValue(),"Desert");
@@ -47,7 +49,7 @@ public class JobTest {
         assertEquals(jobTest3.getCoreCompetency().getValue(),"Persistence");
 
     }
-    @Test
+    @Test //
     public void testJobsForEquality(){
        assertFalse(jobTest4.getId() == jobTest5.getId());
         //assertFalse(job4.equals(job5));
@@ -64,27 +66,24 @@ public class JobTest {
     }
 
     @Test //checks for each field returns the label and value
-    public void testToStringLabelReturned(){
-        //Job jobTest4 = new Job("Web developer", new Employer("XYZ"), new Location("Chicago"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        String toStringLabelValuedTestJob = Job.toString((jobTest4));
-        assertTrue(toStringLabelValuedTestJob.contains("ID: 4"));
-        assertTrue(toStringLabelValuedTestJob.contains("Name: Web developer"));
-        assertTrue(toStringLabelValuedTestJob.contains("Employer: XYZ"));
-        assertTrue(toStringLabelValuedTestJob.contains("Location: Chicago"));
-        assertTrue(toStringLabelValuedTestJob.contains("Position Type: Quality control"));
-        assertTrue(toStringLabelValuedTestJob.contains("Core Competency: Persistence"));
+    public void testToStringLabelPrint(){
+        String testJobWithLabelPrint = String.valueOf(Job.toString((jobTest4)));
+        assertTrue(testJobWithLabelPrint.contains("ID: " + jobTest4.getId()));
+        assertTrue(testJobWithLabelPrint.contains("Name: Web developer"));
+        assertTrue(testJobWithLabelPrint.contains("Employer: XYZ"));
+        assertTrue(testJobWithLabelPrint.contains("Location: Chicago"));
+        assertTrue(testJobWithLabelPrint.contains("Position Type: Quality control"));
+        assertTrue(testJobWithLabelPrint.contains("Core Competency: Persistence"));
 
-       // assertEquals("\nID: " + jobTest4.getId() + "\nName: Product tester\nEmployer: ACME\nLocation: " +
-            //    "Desert\nPosition Type: Quality control\nCore Competency: Persistence\n" , jobTest4.toString());
     }
+
     @Test //returns "data not available message if a field is empty"
     public void testToStringHandlesEmptyField(){
         String toStringBlankFieldsResults = Job.toString(jobTest6);
-        System.out.println(Job.toString(jobTest6));
+        //System.out.println(Job.toString(jobTest6));
         assertTrue(toStringBlankFieldsResults.contains("Data not available!"));
 
     }
-
 
 }
 
